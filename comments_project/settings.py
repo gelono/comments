@@ -33,7 +33,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'comments99-48619c14ee39.herokuapp.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://comments99-48619c14ee39.herokuapp.com/']
+CSRF_TRUSTED_ORIGINS = ['https://comments99-48619c14ee39.herokuapp.com']
 
 
 # Application definition
