@@ -31,8 +31,6 @@ class CommentForm(forms.ModelForm):
         parser = MyHTMLParser()
         parser.feed(text)
 
-        print(parser.open_tags)
-
         if parser.open_tags:
             raise ValidationError('Неверное закрытие тегов.')
 
@@ -45,9 +43,6 @@ class CommentForm(forms.ModelForm):
 
         if text != cleaned_text:
             raise forms.ValidationError('Использованы недопустимые теги.')
-
-        print(text)
-        print(cleaned_text)
 
         self.validate_xhtml(cleaned_text)
 
