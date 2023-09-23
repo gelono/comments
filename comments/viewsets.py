@@ -1,11 +1,6 @@
-from PIL import Image
-from django.contrib.auth.models import User
-from django.views.generic import FormView, ListView
-from django.urls import reverse_lazy
+from django.views.generic import ListView
 from .forms import CommentForm
-from .models import Comment, CommentImage, UploadedFile
-from io import BytesIO
-from django.core.files.base import ContentFile
+from .models import Comment
 
 from .utils import Utils
 
