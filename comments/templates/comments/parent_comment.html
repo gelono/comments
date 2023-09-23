@@ -13,6 +13,11 @@
                 <a href="#" class="open-image-modal" data-original="{{ image.image_path.url }}">{{ file_name }}</a>
             {% endwith %}
         {% endfor %}
+        {% for file in comment.uploadedfile_set.all %}
+            {% with file_name=file.file_path.name|cut:"uploaded_files/" %}
+                <a href="#" class="open-text-modal" data-original="{{ file.file_path.url }}">{{ file_name }}</a>
+            {% endwith %}
+        {% endfor %}
     </div>
     <button class="reply-button">Форма ответа</button>
     {% if comment.comment_set.all.exists %}

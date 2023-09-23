@@ -88,4 +88,35 @@ window.onload = function() {
         }
     });
 
+    //Text files handle
+    const textLinks = document.querySelectorAll('.open-text-modal');
+
+    textLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const originalPath = this.getAttribute('data-original');
+
+            fetch(originalPath)
+                .then(response => response.text())
+                .then(text => {
+                    const modalContainer = document.createElement('div');
+                    modalContainer.classList.add('modal-container');
+                    modalContainer.innerHTML = `
+                        <div class="modal-content">
+                            <pre>${text}</pre>
+                            <button class="close-modal">Close</button>
+                        </div>
+                    `;
+
+                    document.body.appendChild(modalContainer);
+
+                    const closeModal = modalContainer.querySelector('.close-modal');
+                    closeModal.addEventListener('click', function() {
+                        modalContainer.remove();
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+
 }
