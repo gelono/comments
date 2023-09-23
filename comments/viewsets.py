@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from django.views.generic import ListView
 from .forms import CommentForm
 from .models import Comment
