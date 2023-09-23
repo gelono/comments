@@ -1,4 +1,6 @@
 from html.parser import HTMLParser
+
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import bleach
 from django import forms
@@ -37,7 +39,7 @@ class CommentForm(forms.ModelForm):
         return text
 
     def clean_text(self):
-        text = self.cleaned_data['text']
+        text = self.cleaned_data.get('text')
         allowed_tags = HTMLTag.objects.values_list('tag_name', flat=True)
         cleaned_text = bleach.clean(text, tags=allowed_tags, strip=True)
 
@@ -47,6 +49,14 @@ class CommentForm(forms.ModelForm):
         self.validate_xhtml(cleaned_text)
 
         return cleaned_text
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('Пользователь с таким именем уже существует.')
+
+        return username
 
     class Meta:
         model = Comment
