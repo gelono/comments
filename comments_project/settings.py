@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+
+import dj_database_url
 from dotenv import load_dotenv
 import os
 
@@ -81,18 +83,26 @@ WSGI_APPLICATION = 'comments_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 USE_POSTGRES = os.environ.get('USE_POSTGRES') == 'True'
 
-DATABASES = {
-    'default': {
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if DATABASE_URL:
+    DEFAULT_DATABASE = dj_database_url.parse(DATABASE_URL)
+elif USE_POSTGRES:
+    DEFAULT_DATABASE = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['DB_NAME'],
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],
-    } if USE_POSTGRES else {
+    }
+else:
+    DEFAULT_DATABASE = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'db.sqlite'
     }
+
+DATABASES = {
+    'default': DEFAULT_DATABASE
 }
 
 
