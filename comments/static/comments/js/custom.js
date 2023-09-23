@@ -22,10 +22,10 @@ window.onload = function() {
             if (childrenContainer) {
                 if (childrenContainer.style.display === 'none') {
                     childrenContainer.style.display = 'block';
-                    button.textContent = 'Скрыть ветку'; // Изменяем текст кнопки
+                    button.textContent = 'Скрыть ветку';
                 } else {
                     childrenContainer.style.display = 'none';
-                    button.textContent = 'Показать ветку'; // Изменяем текст кнопки
+                    button.textContent = 'Показать ветку';
                 }
             }
         });
@@ -64,9 +64,7 @@ window.onload = function() {
     }
 
     // Display mini images
-
     const imageLinks = document.querySelectorAll('.open-image-modal');
-
     imageLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();

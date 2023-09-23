@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,6 +79,7 @@ WSGI_APPLICATION = 'comments_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+USE_POSTGRES = os.environ.get('USE_POSTGRES') == 'True'
 
 DATABASES = {
     'default': {
@@ -87,6 +89,9 @@ DATABASES = {
         'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],
+    } if USE_POSTGRES else {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite'
     }
 }
 
