@@ -1,0 +1,45 @@
+{% extends 'comments/base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>{{ title }}</h1>
+        <button id="showForm">Новая тема</button>
+        {% include 'comments/form_template.html' %}
+    </div>
+
+    <div class="sorting-buttons">
+        <button class="sort-button" data-column="username">Сортировать по Пользователю</button>
+        <button class="sort-button" data-column="email">Сортировать по Email</button>
+        <button class="sort-button" data-column="created_at">Сортировать по времени создания</button>
+    </div>
+
+    <div class="main-table">
+        {% for comment in comments %}
+            {% include 'comments/parent_comment.html' with comment=comment %}
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% else %}
+                <span class="disabled">&laquo; first</span>
+                <span class="disabled">previous</span>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% else %}
+                <span class="disabled">next</span>
+                <span class="disabled">last &raquo;</span>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

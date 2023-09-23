@@ -1,0 +1,39 @@
+<div class="{% if comment.parent_comment %}child-comment{% else %}parent-comment{% endif %}">
+    <div class="info">
+        <div class="block-username"><strong>Пользователь:</strong> {{ comment.user.username }}</div>
+        <div class="block-email"><strong>Email:</strong> {{ comment.user.email }}</div>
+        <div class="block-created_at"><strong>Создано:</strong> {{ comment.created_at }}</div>
+    </div>
+    <div class="comment-text">
+        {{ comment.text|safe }}
+    </div>
+    <div class="comment-files">
+        {% for image in comment.commentimage_set.all %}
+            {% with file_name=image.image_path.name|cut:"comment_images/" %}
+                <a href="#" class="open-image-modal" data-original="{{ image.image_path.url }}">{{ file_name }}</a>
+            {% endwith %}
+        {% endfor %}
+    </div>
+    <button class="reply-button">Форма ответа</button>
+    {% if comment.comment_set.all.exists %}
+        <button class="show-children-button">Показать ветку</button>
+    {% endif %}
+
+    <div class="reply-form" style="display:none;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+            <input type="hidden" name="parent_comment" value="{{ comment.id }}">
+            <button type="submit">Отправить ответ</button>
+        </form>
+    </div>
+
+    <div class="children-container" style="display:none;">
+        {% for child_comment in comment.comment_set.all %}
+            {% include 'comments/parent_comment.html' with comment=child_comment %}
+        {% endfor %}
+    </div>
+</div>

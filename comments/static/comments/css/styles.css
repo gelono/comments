@@ -1,0 +1,294 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+header {
+    background-color: #003d66;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+header a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+.form-label {
+    display: inline-block;
+    min-width: 150px;
+    vertical-align: top;
+}
+
+.form-error {
+    padding: 0;
+    color: #CC0000;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #CC0000;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.form-container h1 {
+    margin-bottom: 10px; /* Add spacing between the title and the form */
+}
+
+
+.form-container form {
+    width: 100%; /* Ensure the form occupies the entire width of its container */
+    max-width: 400px; /* Set a maximum width for the form */
+    padding: 20px; /* Add padding for a better visual appearance */
+    border: 1px solid #ddd; /* Add a border for the form */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th.sortable {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.comment-row {
+    border: 1px solid #ddd; /* Добавляем границы к строкам */
+}
+
+.comment-text {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.reply-button {
+    margin: 5px 0;
+    padding: 5px 10px;
+    background-color: #4B4CFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.sorting-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+.sort-button {
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.reply-controls {
+    text-align: right;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.comment-controls {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.comment-content {
+    margin-bottom: 10px;
+}
+
+.comment-text {
+    padding: 3px;
+    border: 1px solid gray;
+}
+
+.reply-form-row {
+    display: none;
+}
+
+
+.pagination {
+    text-align: center;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.main-table {
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+}
+
+/* для новых шаблонов */
+.parent-comment {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.child-comment {
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: #f0f0f0;
+}
+
+.show-children-button {
+    margin: 5px 0;
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.children-container {
+    margin-left: 20px;
+}
+
+/* При сортировке по возрастанию */
+.asc:after {
+    content: '\25b2'; /* Значок стрелки вверх (▲) */
+    padding-left: 5px;
+}
+
+/* При сортировке по убыванию */
+.desc:after {
+    content: '\25bc'; /* Значок стрелки вниз (▼) */
+    padding-left: 5px;
+}
+
+.info {
+    height: 20px;
+    border: 1px solid gray;
+    background-color: #e3f2e1;
+}
+
+.block-username {
+  height: 20px;
+  width: 300px;
+  display: inline-block;
+}
+
+.block-email {
+  height: 20px;
+  width: 300px;
+  display: inline-block;
+}
+
+.block-created_at {
+  height: 20px;
+  width: 300px;
+  display: inline-block;
+}
+
+.file-item {
+    margin: 4px 0;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.header-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+.header-nav a:hover {
+    color: #4B4CFF;
+}
