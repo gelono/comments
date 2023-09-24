@@ -6,9 +6,6 @@ venv/
 ENV/
 env.bak/
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
 
 .idea
 
