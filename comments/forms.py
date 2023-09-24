@@ -44,19 +44,35 @@ class CommentForm(forms.ModelForm):
         cleaned_text = bleach.clean(text, tags=allowed_tags, strip=True)
 
         if text != cleaned_text:
-            raise forms.ValidationError('Использованы недопустимые теги.')
+            # raise forms.ValidationError('Использованы недопустимые теги.')
+            self.add_error(
+                'text',
+                forms.ValidationError("Использованы недопустимые теги")
+            )
 
         self.validate_xhtml(cleaned_text)
 
         return cleaned_text
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        email = cleaned_data.get('email')
 
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError('Пользователь с таким именем уже существует.')
+        if username and email:
+            if User.objects.filter(username=username).exists() and not User.objects.filter(email=email).exists():
+                self.add_error(
+                    'username',
+                    forms.ValidationError("Пользователь с таким username уже существует, но с таким email нет")
+                )
 
-        return username
+            if not User.objects.filter(username=username).exists() and User.objects.filter(email=email).exists():
+                self.add_error(
+                    'email',
+                    forms.ValidationError("Пользователь с таким email уже есть")
+                )
+
+        return cleaned_data
 
     class Meta:
         model = Comment

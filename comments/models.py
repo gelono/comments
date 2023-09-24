@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from storages.backends.s3boto3 import S3Boto3Storage
 
 
 class Comment(models.Model):
@@ -15,14 +16,14 @@ class Comment(models.Model):
 
 
 class UploadedFile(models.Model):
-    file_path = models.FileField(upload_to='uploaded_files/')
+    file_path = models.FileField(storage=S3Boto3Storage(), upload_to='uploaded_files/')
     file_type = models.CharField(max_length=50)
     upload_date = models.DateTimeField(auto_now_add=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
 
 class CommentImage(models.Model):
-    image_path = models.ImageField(upload_to='comment_images/')
+    image_path = models.ImageField(storage=S3Boto3Storage(), upload_to='comment_images/')
     image_width = models.PositiveIntegerField()
     image_height = models.PositiveIntegerField()
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
