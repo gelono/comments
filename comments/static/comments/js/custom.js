@@ -18,7 +18,6 @@ window.onload = function() {
     showChildrenButtons.forEach(button => {
         button.addEventListener('click', () => {
             const childrenContainer = button.parentElement.querySelector('.children-container');
-            console.log(childrenContainer)
             if (childrenContainer) {
                 if (childrenContainer.style.display === 'none') {
                     childrenContainer.style.display = 'block';
