@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn comments_project.wsgi
+web: python manage.py runserver 0.0.0.0
