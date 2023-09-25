@@ -20,3 +20,14 @@ Run server:
 ```shell
 python manage.py runserver
 ```
+
+Or you can use docker's commands:
+
+Build:
+```shell
+docker compose build
+```
+Run:
+```shell
+docker compose up
+```
